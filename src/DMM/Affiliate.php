@@ -55,7 +55,7 @@ class Affiliate
      * getResult
      *
      * @access public
-     * @return void
+     * @return array
      */
     public function getResult()
     {
@@ -68,9 +68,8 @@ class Affiliate
         $contents = mb_convert_encoding($contents, 'UTF-8', 'EUC-JP');
         $contents = str_replace('euc-jp','utf8', $contents);
 
-        $array = new SimpleXMLElement($contents);
+        $array = new \SimpleXMLElement($contents);
 
         return $array;
     }
-
 }

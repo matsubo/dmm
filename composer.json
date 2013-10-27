@@ -1,0 +1,26 @@
+{
+  "name": "dmm/affiliate",
+  "description": "DMM affiliate client.",
+  "keywords": ["xml","dmm","affiliate"],
+  "homepage": "https://github.com/matsubo/dmm",
+  "type": "library",
+  "license": "MIT",
+  "require" : {
+    "php": ">=5.3.0"
+  },
+  "authors": [
+  {
+    "name": "Yuki Matsukura",
+    "email": "matsubokkuri@gmail.com",
+    "homepage": "http://matsu.teraren.com/blog/"
+  }
+  ],
+    "require": {
+      "php": ">=5.3"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+      "psr-0": {"DMM": "src/"}
+    }
+}
