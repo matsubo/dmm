@@ -1,26 +1,61 @@
 <?php
+/**
+ * DMM Affiliate API client
+ *
+ * @category Affiliate
+ * @package  DMM
+ * @author   Yuki Matsukura <matsubokkuri@gmail.com>
+ * @license  PHP Version 3.0
+ * @version  $Id$
+ * @link     http://github.com/matsubo/dmm
+ */
 namespace DMM;
 /**
  * DMM\Affiliate
  *
+ * @category Affiliate
+ * @package   DMM
+ * @author    Yuki Matsukura <matsubokkuri@gmail.com>
+ * @copyright 1997-2005 The PHP Group
+ * @license   PHP Version 3.0
+ * @link      http://github.com/matsubo/dmm
  */
 class Affiliate
 {
+    /** @const hostname */
     const HOST = 'affiliate-api.dmm.com';
-    const SERVICE_DIGITAL = 'digital';
+
+    /** @const API version */
     const VERSION = '2.00';
 
+    /** @private int $app_id */
     private $api_id;
+
+    /** @private string your own affiliate ID */
     private $affiliate_id;
+
+    /** @private string keyword to search */
     private $word;
+
+    /** @private string service name */
     private $service;
+
+    /** @private string category name */
     private $floor;
+
+    /** @private int offset of result */
     private $offset;
+
+    /** @private string name of sort key */
     private $sort;
 
+    /** @prvate string name of operation */
     private $operation = 'ItemList';
 
     /**
+     * @private
+     * Domain of API target
+     *
      * - DMM.co.jp: DMM R18
      * - DMM.com: DMM All
      */
@@ -130,7 +165,9 @@ class Affiliate
      */
     public function getResult()
     {
-        $contents = file_get_contents(sprintf('http://%s/?api_id=%s&affiliate_id=%s&operation=%s&version=%s&timestamp=%s&site=%s&service=%s&floor=%s&offset=%d&sort=%s&keyword=%s',
+        $url = sprintf('http://%s/' .
+            '?api_id=%s&affiliate_id=%s&operation=%s&version=%s' .
+            '&timestamp=%s&site=%s&service=%s&floor=%s&offset=%d&sort=%s&keyword=%s',
             self::HOST,
             $this->api_id,
             $this->affiliate_id,
@@ -142,10 +179,13 @@ class Affiliate
             $this->floor,
             $this->offset,
             $this->sort,
-            urlencode(mb_convert_encoding($this->word, 'EUC-JP', 'UTF-8'))));
+            urlencode(mb_convert_encoding($this->word, 'EUC-JP', 'UTF-8'))
+        );
+
+        $contents = file_get_contents($url);
 
         $contents = mb_convert_encoding($contents, 'UTF-8', 'EUC-JP');
-        $contents = str_replace('euc-jp','utf8', $contents);
+        $contents = str_replace('euc-jp', 'utf8', $contents);
 
         $array = new \SimpleXMLElement($contents);
 

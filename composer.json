@@ -19,6 +19,7 @@
       "php": ">=5.3"
     },
     "require-dev": {
+      "instaclick/php-code-sniffer": "dev-patch-3"
     },
     "autoload": {
       "psr-0": {"DMM": "src/"}
